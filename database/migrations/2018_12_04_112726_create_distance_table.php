@@ -19,11 +19,6 @@ class CreateDistanceTable extends Migration
             $table->decimal('initial_longitude', 10, 7);
             $table->decimal('final_latitude', 10, 7);
             $table->decimal('final_longitude', 10, 7);
-
-            // $table->char('initial_latitude', 25);
-            // $table->char('initial_longitude', 25);
-            // $table->char('final_latitude', 25);
-            // $table->char('final_longitude', 25);
             $table->integer('distance'); //Distance in meters
             $table->timestamps();
         });
