@@ -13,28 +13,6 @@ class OrderControllerTest extends TestCase
 {
     use WithoutMiddleware;
 
-    // protected $client;
-
-    // protected function guzzleObject($base_uri, $header)
-    // {
-    //     return $this->client = new \GuzzleHttp\Client([
-    //         'base_uri' => $base_uri,
-    //         'headers' => $header,
-    //     ]);
-    // }
-
-    // protected function setUp()
-    // {
-    //     echo "\nExecuting API Integration Test\n";
-
-    //     $theHeaders = [
-    //         'Content-Type' => 'application/json',
-    //         'Accept' => 'application/json',
-    //     ];
-
-    //     $this->guzzleObject('http://nginx', $theHeaders);
-    // }
-
     public function testOrderCreateIncorrectParameters()
     {
         echo "\n *** Executing Integration Test *** \n";

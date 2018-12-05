@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('status');
-            $table->string('distance_id');
+            $table->integer('distance_id')->unsigned();
             $table->timestamps();
         });
     }

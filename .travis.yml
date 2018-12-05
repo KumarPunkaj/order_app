@@ -1,0 +1,14 @@
+language: php
+php:
+  - '7.1.3'
+  - hhvm
+  - nightly
+cache:
+  directories:
+    - "code/vendor"
+
+before_script:
+  - code/composer install
+
+script:
+  - php code/vendor/phpunit/phpunit/phpunit code/tests/Unit/OrderUnitTest.php
