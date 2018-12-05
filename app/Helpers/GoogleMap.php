@@ -14,7 +14,6 @@ class GoogleMap
      */
     public function getDistance($origin, $destination)
     {
-        return 10;
         $googleApiKey = env('GOOGLE_API_KEY');
 
         $queryString =  env('GOOGLE_API_URL') . "?units=imperial&origins=" . $origin . "&destinations=" . $destination . "&key=" . $googleApiKey;
