@@ -80,6 +80,10 @@ class OrderController extends Controller
     public function update(OrderUpdateRequest $request, $id)
     {
         try {
+            if(!is_numeric($id)) {
+                return $this->response->setError('Invalid Order Id', JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+            }
+
             $order = Order::findOrFail($id);
 
             if ($order->status !== Order::UNASSIGNED_ORDER_STATUS) {

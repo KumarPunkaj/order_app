@@ -135,6 +135,9 @@ class OrderControllerTest extends TestCase
         echo "\n > Order Update Negative Test - Empty Param value \n";
         $this->orderUpdateFailureInvalidParams($orderId, ['status' => ''], $expectedCode = 422);
 
+        echo "\n > Order Update Negative Test - Non numeric order id \n";
+        $this->orderUpdateFailureInvalidParams('23A', ['status' => 'TAKEN'], $expectedCode = 422);
+
         echo "\n > Order Update Negative Test - Invalid Order id \n";
         $this->orderUpdateFailureInvalidParams(9999999, ['status' => 'TAKEN'], $expectedCode = 417);
     }
