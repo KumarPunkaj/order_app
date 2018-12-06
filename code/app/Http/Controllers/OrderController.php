@@ -41,7 +41,7 @@ class OrderController extends Controller
      *
      * @param Request $request
      *
-     * @return bool|\Illuminate\Http\JsonResponse|int|string
+     * @return JsonResponse
      */
     public function create(Request $request)
     {

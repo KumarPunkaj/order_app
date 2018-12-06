@@ -26,8 +26,6 @@ class DistanceValidator
      */
     public function validate($initialLatitude, $initialLongitude, $finalLatitude, $finalLongitude)
     {
-        $response = ['status' => 'success'];
-
         if ($initialLatitude == $finalLatitude && $initialLongitude == $finalLongitude) {
             $this->error = 'REQUESTED_ORIGIN_DESTINATION_SAME';
         } elseif (!$initialLatitude || !$initialLongitude || !$finalLatitude || !$finalLongitude) {

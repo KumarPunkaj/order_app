@@ -21,7 +21,7 @@ class OrderControllerTest extends TestCase
 
         echo "\n > Order Create Negative Test - With Invalid Parameter Keys \n";
         $invalidData1 = [
-            'origin1' => ['44.968046', '-94.420307'],
+            'origin1' => ['28.704060', '77.102493'],
             'destination' => [
                 '28.535517',
                 '77.391029',
@@ -37,7 +37,7 @@ class OrderControllerTest extends TestCase
     {
         echo "\n > Order Create Negative Test - With Empty Parameter \n";
         $invalidData1 = [
-            'origin' => ['44.968046', ''],
+            'origin' => ['28.704060', ''],
             'destination' => [
                 '28.535517',
                 '77.391029',
@@ -52,7 +52,7 @@ class OrderControllerTest extends TestCase
     public function testOrderCreateInvalidData()
     {
         echo "\n > Order Create Negative Test - Invalid Data \n";
-        $invalidData1 = [
+        $invalidData = [
             'origin' => ['44.968046', 'test', '44.968046'],
             'destination' => [
                 '28.535517',
@@ -60,7 +60,7 @@ class OrderControllerTest extends TestCase
             ],
         ];
 
-        $response = $this->json('POST', '/orders', $invalidData1);
+        $response = $this->json('POST', '/orders', $invalidData);
 
         $response->assertStatus(422);
     }
@@ -70,10 +70,10 @@ class OrderControllerTest extends TestCase
         echo "\n > Order Create Positive Test - Valid Data \n";
 
         $validData = [
-            'origin' => ['44.968046', '-94.420307'],
+            'origin' => ['28.704060', '77.102493'],
             'destination' => [
-                '44.33328',
-                '-29.132008',
+                '28.535517',
+                '77.391029',
             ],
         ];
 
@@ -95,10 +95,10 @@ class OrderControllerTest extends TestCase
 
         echo "\n \t > Creating an order \n";
         $validData = [
-            'origin' => ['44.968046', '-94.420307'],
+            'origin' => ['28.704060', '77.102493'],
             'destination' => [
-                '44.33328',
-                '-29.132008',
+                '28.535517',
+                '77.391029',
             ],
         ];
 

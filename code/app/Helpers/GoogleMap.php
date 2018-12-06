@@ -26,8 +26,6 @@ class GoogleMap
             return (isset($data->status)) ? $data->status : 'GOOGLE_API_NULL_RESPONSE';
         }
 
-        $distanceValue = (int)$data->rows[0]->elements[0]->distance->value;
-
-        return $distanceValue;
+        return (int)$data->rows[0]->elements[0]->distance->value;
     }
 }

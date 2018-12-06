@@ -98,7 +98,7 @@ class Order
     {
         $skip = ($page -1) * $limit;
 
-        $orders = (new OrderModel())->with('distanceModel')->skip($skip)->take($limit)->orderBy('id', 'asc')->get();
+        return (new OrderModel())->with('distanceModel')->skip($skip)->take($limit)->orderBy('id', 'asc')->get();
 
         return $orders;
     }
