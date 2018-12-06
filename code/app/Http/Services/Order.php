@@ -4,9 +4,9 @@ namespace App\Http\Services;
 
 use App\Http\Models\Distance;
 use App\Http\Models\Order as OrderModel;
-use Illuminate\Http\JsonResponse;
 use App\Validators\DistanceValidator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
 
 class Order
 {
