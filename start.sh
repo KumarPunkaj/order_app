@@ -18,13 +18,13 @@ sudo sleep 200s #this line is included for composer to finish the dependency ins
 
 echo " $red ----- Running Migrations & Data Seeding ------- $white "
 sudo chmod 777 -R ./code/*
-docker exec delivery_php php artisan migrate
-docker exec delivery_php php artisan db:seed
+docker exec order_app_php php artisan migrate
+docker exec order_app_php php artisan db:seed
 
 echo " $red ----- Running Intergration test cases ------- $white "
-docker exec delivery_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Feature/OrderControllerTest.php
+docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Feature/OrderIntegrationTest.php
 
 echo " $red ----- Running Unit test cases ------- $white "
-docker exec delivery_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit/OrderUnitTest.php
+docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit/OrderUnitTest.php
 
 exit 0
