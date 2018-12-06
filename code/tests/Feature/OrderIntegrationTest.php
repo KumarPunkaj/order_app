@@ -17,7 +17,7 @@ class OrderIntegrationTest extends TestCase
     {
         echo "\n *** Executing Integration Test *** \n";
 
-        echo "\n *** Executing Order Create Scenarion (Negative and Positive) *** \n";
+        echo "\n *** Executing Order Create Scenario (Negative and Positive) *** \n";
 
         echo "\n > Order Create Negative Test - With Invalid Parameter Keys \n";
         $invalidData1 = [
@@ -89,7 +89,7 @@ class OrderIntegrationTest extends TestCase
 
     public function testOrderUpdate()
     {
-        echo "\n \n \n*** Executing Order Update Scenarion (Positive and Negative) *** \n";
+        echo "\n \n \n*** Executing Order Update Scenario (Positive and Negative) *** \n";
 
         echo "\n > Order Update Positive Test - Valid Data \n";
 
@@ -115,7 +115,7 @@ class OrderIntegrationTest extends TestCase
         $response->assertStatus(200);
         $this->assertArrayHasKey('success', $data);
 
-        echo "\n > Order Update Negative Test - For Alread updated order \n";
+        echo "\n > Order Update Negative Test - For Already updated order \n";
         echo "\n \t > Trying to update same order - should get error \n";
 
         $updateData = ['status' => 'TAKEN'];
@@ -153,7 +153,7 @@ class OrderIntegrationTest extends TestCase
 
     public function testOrderListSuccessCount()
     {
-        echo "\n \n \n*** Executing Order List Scenarion (Positive and Negative) *** \n";
+        echo "\n \n \n*** Executing Order List Scenario (Positive and Negative) *** \n";
 
         echo "\n > Order Listing Positive Test - Valid Data Count \n";
 
