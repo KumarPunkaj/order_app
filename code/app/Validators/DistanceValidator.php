@@ -22,7 +22,7 @@ class DistanceValidator
      * @param float $finalLatitude
      * @param float $finalLongitude
      *
-     * @return array
+     * @return bool
      */
     public function validate($initialLatitude, $initialLongitude, $finalLatitude, $finalLongitude)
     {

@@ -14,7 +14,7 @@ class AbstractFormRequest extends FormRequest
     {
         $errors = (new ValidationException($validator))->errors();
 
-        //Currectly condering only first error
+        //Currectly considering only first error
         $firstError = array_values($errors)[0][0];
 
         throw new HttpResponseException(response()->json([
