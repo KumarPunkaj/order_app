@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class OrderControllerTest extends TestCase
+class OrderIntegrationTest extends TestCase
 {
     use WithoutMiddleware;
 

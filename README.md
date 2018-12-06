@@ -1,7 +1,5 @@
 # Docker Laravel RESTful API
 
-[![Build Status](https://travis-ci.com/ravinder09/logistic_api.svg?branch=master)](https://travis-ci.com/ravinder09/logistic_api)
-
 ## About
 
 - [Docker](https://www.docker.com/) as the container service to isolate the environment.
@@ -21,38 +19,38 @@
 
 ## Manually Migrating tables and Data Seeding
 
-1. To run manually migrations use this command `docker exec delivery_php php artisan migrate`
-2. To run manually data import use this command `docker exec delivery_php php artisan db:seed`
+1. To run manually migrations use this command `docker exec order_app_php php artisan migrate`
+2. To run manually data import use this command `docker exec order_app_php php artisan db:seed`
 
 ## Manually Starting the docker and test Cases
 
 1. You can run `docker-compose up` from terminal
 2. Server is accessible at `http://localhost:8080`
 3. Run manual testcase suite by :
-	- Integration test by this `docker exec delivery_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Feature/OrderControllerTest.php` &
-	- Unit Tests by this `docker exec delivery_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit/OrderUnitTest.php`
+	- Integration test by this `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Feature/OrderIntegrationTest.php` &
+	- Unit Tests by this `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit/OrderUnitTest.php`
 
 ## How to Run Tests (Explicity from cli)
 
  Test Cases can be executed by:
-- Integration test by this `docker exec delivery_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Feature/OrderControllerTest.php` &
-- Unit Tests by this `docker exec delivery_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit/OrderUnitTest.php`
+- Integration test by this `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Feature/OrderIntegrationTest.php` &
+- Unit Tests by this `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit/OrderUnitTest.php`
 
 ## App Structure
 
 **./tests**
 
-- this folder contains test cases written under /tests/Feature/OrderControllerTest.php
+- this folder contains test cases written under /tests/Feature/OrderIntegrationTest.php
 
 **./app**
 
 - contains all the server configuration file and controllers and models
 - migration files are written under database folder in migrations directory
-	- To run manually migrations use this command `docker exec delivery_php php artisan migrate`
+	- To run manually migrations use this command `docker exec order_app_php php artisan migrate`
 - Dummy data seeding is performed using faker under database seeds folder
-	- To run manually data import use this command `docker exec delivery_php php artisan db:seed`
+	- To run manually data import use this command `docker exec order_app_php php artisan db:seed`
 - `OrderController` contains all the api's methods :
-    1. localhost:8080/orders?page=0&limit=10 - GET url to fetch orders with page and limit
+    1. localhost:8080/orders?page=1&limit=4 - GET url to fetch orders with page and limit
     2. localhost:8080/orders - POST method to insert new order with origin and distination
     3. localhost:8080/orders - PATCH method to update status for taken.(Handled simultaneous update request from multiple users at the same time with response status 409)
 - PHPUnit.xml provides the unit test case and code coverage
