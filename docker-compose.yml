@@ -32,7 +32,7 @@ services:
             - 3306:3306
         dns_search: mysql
         environment:
-            MYSQL_ROOT_PASSWORD: "root"
+            MYSQL_ROOT_PASSWORD: "password"
             MYSQL_DATABASE: "order_app"
         restart: always
 
