@@ -1,0 +1,132 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is Order API",
+    "version": "1.0.0",
+    "title": "Swagger Order API",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "orders",
+      "description": "Everything about your orders"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/orders": {
+      "post": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Add a new order",
+        "description": "Add a new order",
+        "operationId": "addOrder",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Order object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Orders"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/order/{orderId}": {
+      "patch": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Updates a order status",
+        "description": "Updates a order status",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "GUID",
+            "description": "The Order Id Of specific order"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Order object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrderUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Orders": {
+      "type": "object",
+      "required": [
+        "origin",
+        "destination"
+      ],
+      "properties": {
+        "origin": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ObjectSchemaDefinition"
+          }
+        },
+        "destination": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ObjectSchemaDefinition"
+          }
+        }
+      }
+    },
+    "OrderUpdate": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Order status",
+          "enum": [
+            "TAKEN",
+            "UNASSIGN"
+          ]
+        }
+      }
+    },
+    "ObjectSchemaDefinition": {
+      "type": "string"
+    }
+  }
+}
