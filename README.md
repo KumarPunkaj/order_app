@@ -19,22 +19,22 @@
 
 ## Manually Migrating tables and Data Seeding
 
-1. To run manually migrations use this command `docker exec order_app_php php artisan migrate`
-2. To run manually data import use this command `docker exec order_app_php php artisan db:seed`
+1. To run migrations manually use this command `docker exec order_app_php php artisan migrate`
+2. To run data import manually use this command `docker exec order_app_php php artisan db:seed`
 
 ## Manually Starting the docker and test Cases
 
 1. You can run `docker-compose up` from terminal
 2. Server is accessible at `http://localhost:8080`
-3. Run manual testcase suite by :
-	- Integration test by this `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Feature/OrderIntegrationTest.php` &
-	- Unit Tests by this `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit/OrderUnitTest.php`
+3. Run manual testcase suite:
+	- Integration Tests: `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Feature/OrderIntegrationTest.php` &
+	- Unit Tests: `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit/OrderUnitTest.php`
 
 ## How to Run Tests (Explicity from cli)
 
  Test Cases can be executed by:
-- Integration test by this `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Feature/OrderIntegrationTest.php` &
-- Unit Tests by this `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit/OrderUnitTest.php`
+- Integration Tests: `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Feature/OrderIntegrationTest.php` &
+- Unit Tests: `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit/OrderUnitTest.php`
 
 ## App Structure
 
