@@ -50,7 +50,7 @@
           }
         ],
         "responses": {
-          "405": {
+          "422": {
             "description": "Invalid input"
           }
         }
@@ -83,7 +83,7 @@
           }
         ],
         "responses": {
-          "405": {
+          "422": {
             "description": "Invalid input"
           }
         }
