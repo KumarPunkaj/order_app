@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Http\Models\Order;
 
 class DistanceSeeder extends Seeder
 {
@@ -32,7 +33,8 @@ class DistanceSeeder extends Seeder
         }
 
         $faker = Faker\Factory::create();
-        for($i = 0; $i < 5; $i++) {
+
+        for ($i = 0; $i < 5; $i++) {
             $lat1 = $faker->latitude();
             $lat2 = $faker->latitude();
             $lon1 = $faker->longitude();
@@ -50,29 +52,21 @@ class DistanceSeeder extends Seeder
             ]);
         }
 
-        $distances = DB::table('distance')->pluck('distance', 'id');
-
-        DB::table('orders')->insert([
-            'distance_id' => 1,
-            'status' => 'TAKEN',
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s"),
-        ]);
-
-        foreach ($distances as $disID => $distanceValue) {
+        $distances = DB::table('distance')->orderBy('id')->each(function ($response) {
             for ($i=0; $i < 5 ; $i++) {
                 DB::table('orders')->insert([
-                    'distance_id' => $disID,
-                    'status' => 'UNASSIGN',
-                    'created_at' => date("Y-m-d H:i:s"),
-                    'updated_at' => date("Y-m-d H:i:s"),
+                    'distance_id'    => $response->id,
+                    'distance_value' => $response->distance,
+                    'status'         => $i % 2 == 0 ? Order::UNASSIGNED_ORDER_STATUS : Order::ASSIGNED_ORDER_STATUS,
+                    'created_at'     => date("Y-m-d H:i:s"),
+                    'updated_at'     => date("Y-m-d H:i:s"),
                 ]);
             }
-        }
+        });
     }
 
-    public function distance($lat1, $lon1, $lat2, $lon2) {
-
+    public function distance($lat1, $lon1, $lat2, $lon2)
+    {
         $theta = $lon1 - $lon2;
         $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
         $dist = acos($dist);

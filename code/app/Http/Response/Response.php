@@ -6,16 +6,37 @@ use Illuminate\Http\JsonResponse;
 
 class Response
 {
-    public function setError($message, $responseCode = 400)
+    /**
+     * @var App\Helpers\MessageHelper
+     */
+    protected $messageHelper;
+
+    /**
+     * @param \App\Helpers\MessageHelper $messageHelper
+     */
+    public function __construct(\App\Helpers\MessageHelper $messageHelper)
     {
+        $this->messageHelper = $messageHelper;
+    }
+
+    public function setError($message, $responseCode = 400, $translateMessage = true)
+    {
+        if (true === $translateMessage) {
+            $message = $this->messageHelper->getMessage($message)?:$message;
+        }
+
         $response = ['error' => $message];
 
         return response()->json($response, $responseCode);
     }
 
-    public function setSuccess($message, $responseCode = 200)
+    public function setSuccess($message, $responseCode = 200, $translateMessage = true)
     {
-        $response = ['success' => $message];
+        if (true === $translateMessage) {
+            $message = $this->messageHelper->getMessage($message)?:$message;
+        }
+
+        $response = ['status' => $message];
 
         return response()->json($response, $responseCode);
     }

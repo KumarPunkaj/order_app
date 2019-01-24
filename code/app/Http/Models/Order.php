@@ -11,9 +11,6 @@ class Order extends Model
 
     protected $table = 'orders';
 
-    //Add a virtual colum distance value
-    protected $distanceValue =  null;
-
     public function distanceModel()
     {
         return $this->hasOne('App\Http\Models\Distance', 'id', 'distance_id');
@@ -24,18 +21,22 @@ class Order extends Model
      */
     public function getDistanceValue()
     {
-        return $this->distanceValue ? $this->distanceValue : $this->distanceModel->distance;
+        return $this->distance_value ? $this->distance_value : $this->distanceModel->distance;
     }
 
     /**
-     * @param int $value
+     * @param int $orderId
      *
-     * @return self
+     * @return bool
      */
-    public function setDistanceValue($value)
+    public function takeOrder($orderId)
     {
-        $this->distanceValue = (int) $value;
+        $affectedRows = self::where([
+            ['id', '=', $orderId],
+            ['status', '=', self::UNASSIGNED_ORDER_STATUS],
+        ])
+        ->update(['orders.status' => self::ASSIGNED_ORDER_STATUS]);
 
-        return $this;
+        return $affectedRows > 0 ? true : false;
     }
 }

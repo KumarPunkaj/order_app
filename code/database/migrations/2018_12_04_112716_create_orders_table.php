@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->string('status');
             $table->integer('distance_id')->unsigned();
+            $table->integer('distance_value')->nullable();
             $table->timestamps();
         });
     }

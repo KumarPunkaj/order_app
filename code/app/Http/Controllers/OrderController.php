@@ -65,7 +65,7 @@ class OrderController extends Controller
             }
 
         } catch (Exception $e) {
-            return $this->response->sendError($e->getMessage(), JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->response->setError($e->getMessage(), JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -80,24 +80,19 @@ class OrderController extends Controller
     public function update(OrderUpdateRequest $request, $id)
     {
         try {
-            if(!is_numeric($id)) {
-                return $this->response->setError('Invalid Order Id', JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+            if (!is_numeric($id)) {
+                return $this->response->setError('invalid_id', JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
             }
 
             $order = Order::findOrFail($id);
 
-            if ($order->status !== Order::UNASSIGNED_ORDER_STATUS) {
-                return $this->response->setError('Order already Taken', JsonResponse::HTTP_CONFLICT);
+            if (false === $order->takeOrder($id)) {
+                return $this->response->setError('order_taken', JsonResponse::HTTP_CONFLICT);
             }
 
-            $order->exists = true;
-            $order->id = $id;
-            $order->status = Order::ASSIGNED_ORDER_STATUS;
-            $order->save();
-
-            return $this->response->setSuccess('SUCCESS', JsonResponse::HTTP_OK);
+            return $this->response->setSuccess('success', JsonResponse::HTTP_OK);
         } catch (\Exception $e) {
-            return $this->response->setError('Invalid Order Id', JsonResponse::HTTP_EXPECTATION_FAILED);
+            return $this->response->setError('invalid_id', JsonResponse::HTTP_EXPECTATION_FAILED);
         }
     }
 
@@ -123,7 +118,7 @@ class OrderController extends Controller
 
                 return $this->response->setSuccessResponse($orders);
             } else {
-                return $this->response->setError('No Content Found', JsonResponse::HTTP_NO_CONTENT);
+                return $this->response->setError('NO_DATA_FOUND', JsonResponse::HTTP_NO_CONTENT);
             }
         } catch (Exception $exception) {
             return $this->response->setError($exception->getMessage(), JsonResponse::HTTP_INTERNAL_SERVER_ERROR);

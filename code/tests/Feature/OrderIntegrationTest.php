@@ -113,7 +113,7 @@ class OrderIntegrationTest extends TestCase
         $data = (array) $response->getData();
 
         $response->assertStatus(200);
-        $this->assertArrayHasKey('success', $data);
+        $this->assertArrayHasKey('status', $data);
 
         echo "\n > Order Update Negative Test - For Already updated order \n";
         echo "\n \t > Trying to update same order - should get error \n";

@@ -29,7 +29,7 @@ class OrderUpdateRequest extends AbstractFormRequest
                 'string',
                 function ($attribute, $value, $fail) {
                     if ($value !== Order::ASSIGNED_ORDER_STATUS) {
-                        $fail('INVALID_STATUS');
+                        $fail('status_is_invalid');
                     }
                 },
             ]
@@ -44,8 +44,8 @@ class OrderUpdateRequest extends AbstractFormRequest
     public function messages()
     {
         return [
-            'status.required' => 'Missing Status Parameter',
-            'status.string' => 'Invalid Status Type',
+            'status.required' => 'status_is_invalid',
+            'status.string' => 'status_is_invalid',
         ];
     }
 }

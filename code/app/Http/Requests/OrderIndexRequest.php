@@ -45,12 +45,12 @@ class OrderIndexRequest extends AbstractFormRequest
     public function messages()
     {
         return [
-            'page.required' => 'Missing Page Parameter',
-            'page.integer' => 'Invalid Page Type',
-            'page.min' => 'Minimum page no must be 1',
-            'limit.required' => 'Missing Limit Parameter',
-            'limit.integer' => 'Invalid Limit Type',
-            'limit.min' => 'Minimum limit must be 1',
+            'page.required' => 'REQUEST_PARAMETER_MISSING',
+            'page.integer' => 'INVALID_PARAMETER_TYPE',
+            'page.min' => 'INVALID_PARAMETERS',
+            'limit.required' => 'REQUEST_PARAMETER_MISSING',
+            'limit.integer' => 'INVALID_PARAMETER_TYPE',
+            'limit.min' => 'INVALID_PARAMETERS',
         ];
     }
 }

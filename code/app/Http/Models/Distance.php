@@ -28,7 +28,7 @@ class Distance extends Model
                 'array',
                 function ($attribute, $value, $fail) {
                     if (count($value) !== 2 || empty($value[0]) || empty($value[1])) {
-                        $fail($attribute.' is invalid.');
+                        $fail('INVALID_PARAMETERS');
                     }
                 },
             ],
@@ -37,7 +37,7 @@ class Distance extends Model
                 'array',
                 function ($attribute, $value, $fail) {
                     if (count($value) !== 2 || empty($value[0]) || empty($value[1])) {
-                        $fail($attribute.' is invalid.');
+                        $fail('INVALID_PARAMETERS');
                     }
                 },
             ],
@@ -60,7 +60,7 @@ class Distance extends Model
             ['initial_longitude', '=', $initialLongitude],
             ['final_latitude', '=', $finalLatitude],
             ['final_longitude', '=', $finalLongitude],
-            ])->first();
+        ])->first();
 
         //If model is not available, create a new one
         if (null === $distance) {

@@ -7,8 +7,8 @@ class GoogleMap
     /**
      * Gets the distance from google api.
      *
-     * @params string $origin
-     * @params string destination
+     * @param string $origin
+     * @param string destination
      *
      * @return int
      */
@@ -26,6 +26,10 @@ class GoogleMap
             return (isset($data->status)) ? $data->status : 'GOOGLE_API_NULL_RESPONSE';
         }
 
-        return (int)$data->rows[0]->elements[0]->distance->value;
+        try {
+            return (int) $data->rows[0]->elements[0]->distance->value;
+        } catch (\Exception $e) {
+            return (isset($data->rows[0]->elements[0]->status)) ? $data->rows[0]->elements[0]->status : 'GOOGLE_API_NULL_RESPONSE';
+        }
     }
 }

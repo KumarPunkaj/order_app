@@ -71,7 +71,7 @@ class Order
         $order = new OrderModel();
         $order->status = OrderModel::UNASSIGNED_ORDER_STATUS;
         $order->distance_id = $distance->id;
-        $order->setDistanceValue($distance->distance);
+        $order->distance_value = $distance->distance;
         $order->save();
 
         return $order;
@@ -98,7 +98,7 @@ class Order
     {
         $skip = ($page -1) * $limit;
 
-        return (new OrderModel())->with('distanceModel')->skip($skip)->take($limit)->orderBy('id', 'asc')->get();
+        return (new OrderModel())->skip($skip)->take($limit)->orderBy('id', 'asc')->get();
 
         return $orders;
     }
