@@ -2,11 +2,13 @@
 
 namespace App\Http\Services;
 
+use App\Http\Factory\DistanceFactory;
 use App\Http\Models\Distance;
 use App\Http\Models\Order as OrderModel;
 use App\Validators\DistanceValidator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
+use App\Helpers\DistanceHelper;
 
 class Order
 {
@@ -26,9 +28,16 @@ class Order
     protected $distanceValidator;
 
 
-    public function __construct(DistanceValidator $distanceValidator)
+    /**
+     * @var DistanceHelper
+     */
+    protected $distanceHelper;
+
+
+    public function __construct(DistanceValidator $distanceValidator, DistanceHelper $distanceHelper)
     {
         $this->distanceValidator = $distanceValidator;
+        $this->distanceHelper = $distanceHelper;
     }
 
     /**
@@ -62,7 +71,7 @@ class Order
 
         if(!$distance instanceof \App\Http\Models\Distance) {
             $this->error = $distance;
-            $this->errorCode = JsonResponse::HTTP_BAD_REQUEST;
+            $this->errorCode = JsonResponse::HTTP_INTERNAL_SERVER_ERROR;
 
             return false;
         }
@@ -83,7 +92,7 @@ class Order
         $finalLatitude,
         $finalLongitude
     ) {
-        $model = new Distance;
+        $model = DistanceFactory::create($this->distanceHelper);
 
         return $model->getOrSetDistance($initialLatitude, $initialLongitude, $finalLatitude, $finalLongitude);
     }
@@ -96,9 +105,14 @@ class Order
      */
     public function getList($page, $limit)
     {
-        $skip = ($page -1) * $limit;
+        $page = (int) $page;
+        $limit = (int) $limit;
+        $orders = [];
 
-        return (new OrderModel())->skip($skip)->take($limit)->orderBy('id', 'asc')->get();
+        if ($page > 0 && $limit > 0) {
+            $skip = ($page -1) * $limit;
+            $orders = (new OrderModel())->skip($skip)->take($limit)->orderBy('id', 'asc')->get();
+        }
 
         return $orders;
     }

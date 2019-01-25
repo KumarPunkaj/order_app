@@ -10,10 +10,12 @@ class OrderUnitTest extends Tests\TestCase
         $origin = '44.968046,-94.420307';
         $destination = '44.33328,-29.132006';
 
-        $stub = $this->createMock(\App\Helpers\helper::class);
+        $stub = $this->createMock(\App\Library\Distance\GoogleDistanceMatrix::class);
         $stub->method('getDistance')->with($origin, $destination)->willReturn(100);
 
-        $this->assertEquals(100, $stub->getDistance($origin,$destination));
+        $helper = new \App\Helpers\DistanceHelper($stub);
+
+        $this->assertEquals(100, $helper->getDistance($origin,$destination));
     }
 
     function testDistanceValidatorPositive()
@@ -21,13 +23,6 @@ class OrderUnitTest extends Tests\TestCase
         $validData = [
             'initialLatitude' => '44.968046',
             'initialLongitude' => '-94.420307',
-            'finalLatitude' => '44.33328',
-            'finalLongitude' => '-29.132006',
-        ];
-
-        $inValidData = [
-            'initialLatitude' => '400.968046',
-            'initialLongitude' => '-904.420307',
             'finalLatitude' => '44.33328',
             'finalLongitude' => '-29.132006',
         ];

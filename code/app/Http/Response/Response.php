@@ -19,7 +19,7 @@ class Response
         $this->messageHelper = $messageHelper;
     }
 
-    public function setError($message, $responseCode = 400, $translateMessage = true)
+    public function sendResponseAsError($message, $responseCode = JsonResponse::HTTP_BAD_REQUEST, $translateMessage = true)
     {
         if (true === $translateMessage) {
             $message = $this->messageHelper->getMessage($message)?:$message;
@@ -30,7 +30,7 @@ class Response
         return response()->json($response, $responseCode);
     }
 
-    public function setSuccess($message, $responseCode = 200, $translateMessage = true)
+    public function sendResponseAsSuccess($message, $responseCode = JsonResponse::HTTP_OK, $translateMessage = true)
     {
         if (true === $translateMessage) {
             $message = $this->messageHelper->getMessage($message)?:$message;

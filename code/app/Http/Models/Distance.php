@@ -6,42 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Distance extends Model
 {
-    /** @var \App\Helpers\Helper */
-    protected $helper;
+    /** @var \App\Helpers\DistanceHelper */
+    protected $distanceHelper;
 
     protected $table = 'distance';
 
-    /** @param \App\Helpers\Helper $helper */
-    public function __construct()
-    {
-        $this->helper = \App::make('App\Helpers\Helper');
-    }
-
     /**
-     * @return array
+     * @param \App\Helpers\DistanceHelper $distanceHelper
+     *
+     * @return self
      */
-    public function rules()
+    public function setDistanceHelper(\App\Helpers\DistanceHelper $distanceHelper)
     {
-        return [
-            'origin' => [
-                'required',
-                'array',
-                function ($attribute, $value, $fail) {
-                    if (count($value) !== 2 || empty($value[0]) || empty($value[1])) {
-                        $fail('INVALID_PARAMETERS');
-                    }
-                },
-            ],
-            'destination' => [
-                'required',
-                'array',
-                function ($attribute, $value, $fail) {
-                    if (count($value) !== 2 || empty($value[0]) || empty($value[1])) {
-                        $fail('INVALID_PARAMETERS');
-                    }
-                },
-            ],
-        ];
+        $this->distanceHelper = $distanceHelper;
+
+        return $this;
     }
 
     /**
@@ -67,7 +46,7 @@ class Distance extends Model
             $origin = $initialLatitude . "," . $initialLongitude;
             $destination = $finalLatitude . "," . $finalLongitude;
 
-            $distanceBetween = $this->helper->getDistance($origin, $destination);
+            $distanceBetween = $this->distanceHelper->getDistance($origin, $destination);
 
             if (!is_int($distanceBetween)) {
                 return $distanceBetween;

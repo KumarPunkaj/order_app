@@ -11,7 +11,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class OrderIntegrationTest extends TestCase
 {
-    use WithoutMiddleware;
+    // use WithoutMiddleware;
 
     public function testOrderCreateIncorrectParameters()
     {

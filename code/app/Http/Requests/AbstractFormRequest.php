@@ -22,6 +22,16 @@ class AbstractFormRequest extends FormRequest
         $this->responseHelper = $responseHelper;
     }
 
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
     protected function failedValidation(Validator $validator)
     {
         $errors = (new ValidationException($validator))->errors();
@@ -30,7 +40,7 @@ class AbstractFormRequest extends FormRequest
         $firstError = array_values($errors)[0][0];
 
         throw new HttpResponseException(
-            $this->responseHelper->setError($firstError, JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
+            $this->responseHelper->sendResponseAsError($firstError, JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
         );
     }
 }

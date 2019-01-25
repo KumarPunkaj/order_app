@@ -2,21 +2,18 @@
 
 namespace App\Helpers;
 
-use App\Http\Models\Distance;
-use Illuminate\Support\Facades\DB;
-
-class Helper
+class DistanceHelper
 {
     /**
-     * @var App\Helpers\GoogleMap
+     * @var \App\Library\Distance\GoogleDistanceMatrix
      */
-    protected $googleMapHelper;
+    protected $googleDistanceMatrix;
 
     /** @param \App\Helpers\GoogleMap $googleMapHelper */
     public function __construct(
-        \App\Helpers\GoogleMap $googleMapHelper
+        \App\Library\Distance\GoogleDistanceMatrix $googleDistanceMatrix
     ) {
-        $this->googleMapHelper = $googleMapHelper;
+        $this->googleDistanceMatrix = $googleDistanceMatrix;
     }
 
     /**
@@ -29,6 +26,6 @@ class Helper
      */
     public function getDistance($origin, $destination)
     {
-        return $this->googleMapHelper->getDistance($origin, $destination);
+        return $this->googleDistanceMatrix->getDistance($origin, $destination);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Middleware\CheckInt;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('orders', 'OrderController@create');
-Route::patch('orders/{id}', 'OrderController@update');
+Route::middleware(CheckInt::class)->patch('orders/{id}', 'OrderController@update');
 Route::get('orders', 'OrderController@index');
