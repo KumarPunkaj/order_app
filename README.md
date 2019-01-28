@@ -28,13 +28,13 @@
 2. Server is accessible at `http://localhost:8080`
 3. Run manual testcase suite:
 	- Integration Tests: `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Feature/OrderIntegrationTest.php` &
-	- Unit Tests: `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit/OrderUnitTest.php`
+	- Unit Tests: `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit`
 
 ## How to Run Tests (Explicity from cli)
 
  Test Cases can be executed by:
 - Integration Tests: `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Feature/OrderIntegrationTest.php` &
-- Unit Tests: `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit/OrderUnitTest.php`
+- Unit Tests: `docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit`
 
 ## API Reference Documentation
 

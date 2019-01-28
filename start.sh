@@ -25,6 +25,6 @@ echo " $red ----- Running Intergration test cases ------- $white "
 docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Feature/OrderIntegrationTest.php
 
 echo " $red ----- Running Unit test cases ------- $white "
-docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit/OrderUnitTest.php
+docker exec order_app_php php ./vendor/phpunit/phpunit/phpunit /var/www/html/tests/Unit
 
 exit 0
