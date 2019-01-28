@@ -8,9 +8,8 @@ use App\Http\Middleware\CheckInt;
 | API Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
+| Registe API routes here.
+| Defined routes for orderController to manage orders
 |
 */
 

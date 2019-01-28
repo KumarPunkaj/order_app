@@ -29,6 +29,9 @@ class MessageHelper
     ];
 
     /**
+     * Provided translated message if key is provided, otherwise provided whole array of
+     * key->translated_message pairs
+     *
      * @param string|null $key
      *
      * @return array|string|null

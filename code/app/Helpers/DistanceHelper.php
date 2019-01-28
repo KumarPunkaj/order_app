@@ -17,12 +17,12 @@ class DistanceHelper
     }
 
     /**
-     * Gets the distance from google api.
+     * Fetches distance between two pairs of lattitude and longitude
      *
      * @param string $origin
      * @param string destination
      *
-     * @return int
+     * @return int Distance in meters
      */
     public function getDistance($origin, $destination)
     {

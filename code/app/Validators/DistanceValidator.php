@@ -15,7 +15,7 @@ class DistanceValidator
     }
 
     /**
-     * Validate Input Parameters.
+     * function validates validity of given input geo location
      *
      * @param float $initialLatitude
      * @param float $initialLongitude

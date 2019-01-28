@@ -33,7 +33,10 @@ class Order
      */
     protected $distanceHelper;
 
-
+    /**
+     * @param DistanceValidator $distanceValidator
+     * @param DistanceHelper    $distanceHelper
+     */
     public function __construct(DistanceValidator $distanceValidator, DistanceHelper $distanceHelper)
     {
         $this->distanceValidator = $distanceValidator;
@@ -41,6 +44,8 @@ class Order
     }
 
     /**
+     * Create a order based on geo location provided in requestData param
+     *
      * @param Request $requestData
      *
      * @return Order|false
@@ -86,6 +91,14 @@ class Order
         return $order;
     }
 
+    /**
+     * @param float $initialLatitude
+     * @param float $initialLongitude
+     * @param float $finalLatitude
+     * @param float $finalLongitude
+     *
+     * @return int
+     */
     public function getDistance(
         $initialLatitude,
         $initialLongitude,
@@ -98,6 +111,8 @@ class Order
     }
 
     /**
+     * Fetches list of order in system using given limit and page variable
+     *
      * @param int $page
      * @param int $limit
      *
@@ -115,5 +130,33 @@ class Order
         }
 
         return $orders;
+    }
+
+    /**
+     * Fetches Order model based on primary key provided
+     *
+     * @param int $id
+     *
+     * @return OrderModel
+     */
+    public function getOrderById($id)
+    {
+        $order = new OrderModel();
+
+        return $order->getOrderById($id);
+    }
+
+    /**
+     * Mark an order as TAKEN, if not already
+     *
+     * @param int $orderId
+     *
+     * @return bool
+     */
+    public function takeOrder($orderId)
+    {
+        $order = new OrderModel();
+
+        return $order->takeOrder($orderId);
     }
 }

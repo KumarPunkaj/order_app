@@ -35,7 +35,8 @@ class OrderController extends Controller
     }
 
     /**
-     * Places a new order
+     * Create a new order, given origin and destination coordinates in proper format
+     * Validate incoming requests and raises 422 error in case of request expection doesnot got matched.
      *
      * @param OrderCreateRequest $request
      *
@@ -60,19 +61,20 @@ class OrderController extends Controller
     }
 
     /**
-     * Updates an order
+     * Updates an order, providing valid orderID in params
+     * If order is already being taken send response as 417 with proper message
      *
      * @param OrderUpdateRequest $request
      * @param int                $id
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(OrderUpdateRequest $request, $id)
     {
         try {
-            $order = Order::findOrFail($id);
+            $order = $this->orderService->getOrderById($id);
 
-            if (false === $order->takeOrder($id)) {
+            if (false === $this->orderService->takeOrder($id)) {
                 return $this->response->sendResponseAsError('order_taken', JsonResponse::HTTP_CONFLICT);
             }
 
@@ -83,7 +85,10 @@ class OrderController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * List down orders available in system, provided proper $page and $limit variables in params
+     * In case of invalid request parameters send proper message with 422 status code
+     *
+     * @param OrderIndexRequest $request
      *
      * @return JsonResponse
      */
@@ -95,7 +100,7 @@ class OrderController extends Controller
 
             $records = $this->orderService->getList($page, $limit);
 
-            if (!empty($records)) {
+            if ($records && $records->count() > 0) {
                 $orders = [];
 
                 foreach ($records as $record) {

@@ -10,7 +10,9 @@ class DistanceTest extends Tests\TestCase
 
     protected function setUp()
     {
+        $this->orderService = $this->createMock(\App\Http\Services\Order::class);
         $this->distanceHelper = $this->createMock(\App\Helpers\DistanceHelper::class);
+        $this->response = $this->createMock(\App\Http\Response\Response::class);
 
         parent::setUp();
     }

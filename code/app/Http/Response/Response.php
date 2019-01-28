@@ -19,6 +19,13 @@ class Response
         $this->messageHelper = $messageHelper;
     }
 
+    /**
+     * @param string  $message
+     * @param int  $responseCode
+     * @param boolean $translateMessage
+     *
+     * @return JsonResponse
+     */
     public function sendResponseAsError($message, $responseCode = JsonResponse::HTTP_BAD_REQUEST, $translateMessage = true)
     {
         if (true === $translateMessage) {
@@ -30,6 +37,13 @@ class Response
         return response()->json($response, $responseCode);
     }
 
+    /**
+     * @param string  $message
+     * @param int  $responseCode
+     * @param boolean $translateMessage
+     *
+     * @return JsonResponse
+     */
     public function sendResponseAsSuccess($message, $responseCode = JsonResponse::HTTP_OK, $translateMessage = true)
     {
         if (true === $translateMessage) {
@@ -49,7 +63,7 @@ class Response
         return response()->json($response, JsonResponse::HTTP_OK);
     }
 
-    public function formatOrderAsResponse($order)
+    public function formatOrderAsResponse(\App\Http\Models\Order $order)
     {
         return [
             'id' => $order->id,

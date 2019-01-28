@@ -11,6 +11,9 @@ class Order extends Model
 
     protected $table = 'orders';
 
+    /**
+     * @return \App\Http\Models\Distance
+     */
     public function distanceModel()
     {
         return $this->hasOne('App\Http\Models\Distance', 'id', 'distance_id');
@@ -25,6 +28,8 @@ class Order extends Model
     }
 
     /**
+     * Update order status from UNASSIGNED to TAKEN if order is not already taken
+     *
      * @param int $orderId
      *
      * @return bool
@@ -38,5 +43,17 @@ class Order extends Model
         ->update(['orders.status' => self::ASSIGNED_ORDER_STATUS]);
 
         return $affectedRows > 0 ? true : false;
+    }
+
+    /**
+     * Fetches a order model using its primary key
+     *
+     * @param int $id
+     *
+     * @return self
+     */
+    public function getOrderById($id)
+    {
+        return self::findOrFail($id);
     }
 }

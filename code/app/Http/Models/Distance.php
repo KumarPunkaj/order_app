@@ -24,6 +24,10 @@ class Distance extends Model
     }
 
     /**
+     * Fetches distance between two geo coordinates.
+     * First checks if distance respect to given coordinates exists already in db otherwise
+     * get distance from a map API
+     *
      * @param string $initialLatitude
      * @param string $initialLongitude
      * @param string $finalLatitude
