@@ -13,5 +13,5 @@ interface DistanceMatrixInterface
      *
      * @return int|string
      */
-    public function getDistance(string $origin, string $destination);
+    public function getDistance($origin, $destination);
 }
