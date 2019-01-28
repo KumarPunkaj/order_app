@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    const UNASSIGNED_ORDER_STATUS = 'UNASSIGN';
+    const UNASSIGNED_ORDER_STATUS = 'UNASSIGNED';
     const ASSIGNED_ORDER_STATUS = 'TAKEN';
 
     protected $table = 'orders';

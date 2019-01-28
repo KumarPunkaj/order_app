@@ -54,27 +54,27 @@
               {
                 "id": 1,
                 "distance": 46732,
-                "status": 1
+                "status": "TAKEN"
               },
               {
                 "id": 2,
                 "distance": 46731,
-                "status": 0
+                "status": "UNASSIGNED"
               },
               {
                 "id": 3,
                 "distance": 56908,
-                "status": 0
+                "status": "UNASSIGNED"
               },
               {
                 "id": 4,
                 "distance": 49132,
-                "status": 0
+                "status": "UNASSIGNED"
               },
               {
                 "id": 5,
                 "distance": 46732,
-                "status": 0
+                "status": "UNASSIGNED"
               }
             ]
     ```
@@ -106,7 +106,7 @@
             {
               "id": 44,
               "distance": 46732,
-              "status": "UNASSIGN"
+              "status": "UNASSIGNED"
             }
     ```
 

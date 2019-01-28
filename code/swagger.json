@@ -120,7 +120,7 @@
           "description": "Order status",
           "enum": [
             "TAKEN",
-            "UNASSIGN"
+            "UNASSIGNED"
           ]
         }
       }
