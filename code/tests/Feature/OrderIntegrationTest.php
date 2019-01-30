@@ -17,7 +17,8 @@ class OrderIntegrationTest extends TestCase
 
         echo "\n *** Executing Order Create Scenario (Negative and Positive) *** \n";
 
-        echo "\n > Order Create Negative Test - With Invalid Parameter Keys \n";
+        echo "\n > Order Create Negative Test - With Invalid Parameter Keys - Should get 422 \n";
+
         $invalidData1 = [
             'origin1' => ['28.704060', '77.102493'],
             'destination' => [
@@ -33,7 +34,8 @@ class OrderIntegrationTest extends TestCase
 
     public function testOrderCreateEmptyParameters()
     {
-        echo "\n > Order Create Negative Test - With Empty Parameter \n";
+        echo "\n > Order Create Negative Test - With Empty Parameter - Should get 422";
+
         $invalidData1 = [
             'origin' => ['28.704060', ''],
             'destination' => [
@@ -49,7 +51,7 @@ class OrderIntegrationTest extends TestCase
 
     public function testOrderCreateInvalidData()
     {
-        echo "\n > Order Create Negative Test - Invalid Data \n";
+        echo "\n > Order Create Negative Test - Invalid Data - should get 422 \n";
         $invalidData = [
             'origin' => ['44.968046', 'test', '44.968046'],
             'destination' => [
@@ -68,7 +70,7 @@ class OrderIntegrationTest extends TestCase
         echo "\n > Order Create Positive Test - Valid Data \n";
 
         $validData = [
-            'origin' => ['28.704060', '77.102493'],
+            'origin' => ['28.704061', '77.102493'],
             'destination' => [
                 '28.535517',
                 '77.391029',
@@ -78,8 +80,10 @@ class OrderIntegrationTest extends TestCase
         $response = $this->json('POST', '/orders', $validData);
         $data = (array) $response->getData();
 
+        echo "\n\t > should got status 200 \n";
         $response->assertStatus(200);
 
+        echo "\n\t > Response should have key id, status and distance \n";
         $this->assertArrayHasKey('id', $data);
         $this->assertArrayHasKey('status', $data);
         $this->assertArrayHasKey('distance', $data);
@@ -110,7 +114,10 @@ class OrderIntegrationTest extends TestCase
         $response = $this->json('PATCH', '/orders/'. $orderId, $updateData);
         $data = (array) $response->getData();
 
+        echo "\n > Update Order - should have status 200 \n";
         $response->assertStatus(200);
+
+        echo "\n > Update Order - response has key as `status` \n";
         $this->assertArrayHasKey('status', $data);
 
         echo "\n > Order Update Negative Test - For Already updated order \n";
@@ -122,6 +129,8 @@ class OrderIntegrationTest extends TestCase
         $data = (array) $response->getData();
 
         $response->assertStatus(409);
+
+        echo "\n \t > Trying to update same order - response should has key `error` \n";
         $this->assertArrayHasKey('error', $data);
 
         echo "\n > Order Update Negative Test - Invalid Params key (status1) \n";
@@ -145,7 +154,10 @@ class OrderIntegrationTest extends TestCase
         $response = $this->json('PATCH', '/orders/'. $orderId, $params);
         $data = (array) $response->getData();
 
+        echo "\n \t > Trying to update Invalid Order - response should has status $expectedCode \n";
         $response->assertStatus($expectedCode);
+
+        echo "\n \t > Trying to update Invalid Order - response should has key `error` \n";
         $this->assertArrayHasKey('error', $data);
     }
 
@@ -153,26 +165,31 @@ class OrderIntegrationTest extends TestCase
     {
         echo "\n \n \n*** Executing Order List Scenario (Positive and Negative) *** \n";
 
-        echo "\n > Order Listing Positive Test - Valid Data Count \n";
+        echo "\n > Order Listing Positive Test - Valid Data Count(page=1&limit=4) \n";
 
         $query = 'page=1&limit=4';
         $response = $this->json('GET', "/orders?$query", []);
         $data = (array) $response->getData();
 
+        echo "\n > Order Listing Positive Test - Should get status as 200  \n";
         $response->assertStatus(200);
+
+        echo "\n > Order Listing Positive Test - count of data should less than or equal to 4  \n";
         $this->assertLessThan(5, count($data));
     }
 
     public function testOrderListSuccessData()
     {
-        echo "\n > Order Listing Positive Test - Valid Data Keys\n";
+        echo "\n > Order Listing Positive Test - Valid Data Keys (page=1&limit=4)\n";
 
         $query = 'page=1&limit=4';
         $response = $this->json('GET', "/orders?$query", []);
         $data = (array) $response->getData();
 
+        echo "\n\t > Status should be 200\n";
         $response->assertStatus(200);
 
+        echo "\n\t > Response should contain id, distance and status key\n";
         foreach ($data as $order) {
             $order = (array) $order;
             $this->assertArrayHasKey('id', $order);

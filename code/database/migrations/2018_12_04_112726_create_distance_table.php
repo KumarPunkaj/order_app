@@ -15,10 +15,10 @@ class CreateDistanceTable extends Migration
     {
         Schema::create('distance', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('initial_latitude', 10, 7);
-            $table->decimal('initial_longitude', 10, 7);
-            $table->decimal('final_latitude', 10, 7);
-            $table->decimal('final_longitude', 10, 7);
+            $table->string('initial_latitude');
+            $table->string('initial_longitude');
+            $table->string('final_latitude');
+            $table->string('final_longitude');
             $table->integer('distance'); //Distance in meters
             $table->timestamps();
         });
