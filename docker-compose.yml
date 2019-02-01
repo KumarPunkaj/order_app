@@ -25,6 +25,10 @@ services:
         dns_search: php
         depends_on:
             - mysql
+        dns:
+            - 8.8.8.8
+            - 4.4.4.4
+            - 192.168.9.45
     mysql:
         build: ./mysql/
         container_name: order_app_mysql
